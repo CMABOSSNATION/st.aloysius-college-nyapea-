@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avenue Media</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-black bg-opacity-80 sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-purple-400">Avenue Media</h1>
+      <nav class="space-x-6 text-sm">
+        <a href="#music" class="hover:text-purple-300">Music</a>
+        <a href="#videos" class="hover:text-purple-300">Videos</a>
+        <a href="#news" class="hover:text-purple-300">News</a>
+        <a href="#ads" class="hover:text-purple-300">Ads</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="text-center py-12 bg-gradient-to-b from-black to-purple-950">
+    <h2 class="text-4xl font-bold mb-4 text-purple-300">Stream. Watch. Download.</h2>
+    <p class="text-gray-300 text-lg">All your favorite music and videos, in one place.</p>
+  </section>
+
+  <!-- Music Section -->
+  <section id="music" class="p-6">
+    <h2 class="text-2xl font-bold mb-4 text-purple-300">🎧 Featured Music</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Music Card -->
+      <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <h3 class="text-lg font-semibold">Track 1: Dream Flow</h3>
+        <audio controls class="w-full mt-2">
+          <source src="sample1.mp3" type="audio/mpeg" />
+        </audio>
+        <p class="mt-2 text-sm text-gray-300">Plays: <span class="font-bold" id="plays1">0</span></p>
+        <a href="sample1.mp3" download class="text-purple-400 hover:underline text-sm">Download</a>
+      </div>
+      <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <h3 class="text-lg font-semibold">Track 2: Night Vision</h3>
+        <audio controls class="w-full mt-2">
+          <source src="sample2.mp3" type="audio/mpeg" />
+        </audio>
+        <p class="mt-2 text-sm text-gray-300">Plays: <span class="font-bold" id="plays2">0</span></p>
+        <a href="sample2.mp3" download class="text-purple-400 hover:underline text-sm">Download</a>
+      </div>
+      <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <h3 class="text-lg font-semibold">Track 3: Echo Waves</h3>
+        <audio controls class="w-full mt-2">
+          <source src="sample3.mp3" type="audio/mpeg" />
+        </audio>
+        <p class="mt-2 text-sm text-gray-300">Plays: <span class="font-bold" id="plays3">0</span></p>
+        <a href="sample3.mp3" download class="text-purple-400 hover:underline text-sm">Download</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section id="videos" class="p-6 bg-black bg-opacity-50">
+    <h2 class="text-2xl font-bold mb-4 text-purple-300">🎬 Trending Videos</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <video controls class="w-full rounded">
+          <source src="video1.mp4" type="video/mp4" />
+        </video>
+        <p class="mt-2 text-sm text-gray-300">Plays: <span class="font-bold" id="videoPlays1">0</span></p>
+      </div>
+      <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <video controls class="w-full rounded">
+          <source src="video2.mp4" type="video/mp4" />
+        </video>
+        <p class="mt-2 text-sm text-gray-300">Plays: <span class="font-bold" id="videoPlays2">0</span></p>
+      </div>
+      <div class="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <video controls class="w-full rounded">
+          <source src="video3.mp4" type="video/mp4" />
+        </video>
+        <p class="mt-2 text-sm text-gray-300">Plays: <span class="font-bold" id="videoPlays3">0</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section id="news" class="p-6">
+    <h2 class="text-2xl font-bold mb-4 text-purple-300">📰 News & Celebrity Buzz</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-800 p-4 rounded-lg">
+        <h3 class="text-xl font-bold text-purple-200">New Artist Launch: KX9</h3>
+        <p class="text-gray-300 text-sm mt-2">Emerging artist KX9 released his debut EP "Neon Pulse", gaining traction worldwide.</p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg">
+        <h3 class="text-xl font-bold text-purple-200">Celebrity Spotlight: Luna Rose</h3>
+        <p class="text-gray-300 text-sm mt-2">Luna shares her journey in a new documentary "Behind the Lights". Streaming now.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ads Section -->
+  <section id="ads" class="p-6 bg-black bg-opacity-60">
+    <h2 class="text-2xl font-bold mb-4 text-purple-300">📢 Sponsored Ads</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-purple-900 p-4 rounded-lg flex justify-between items-center">
+        <div>
+          <h4 class="font-bold text-lg">🎛️ Mix Master Pro</h4>
+          <p class="text-sm">Upgrade your sound with pro mixing tools.</p>
+        </div>
+        <button class="bg-purple-500 px-4 py-2 rounded text-black font-semibold">Try Now</button>
+      </div>
+      <div class="bg-pink-900 p-4 rounded-lg flex justify-between items-center">
+        <div>
+          <h4 class="font-bold text-lg">🎤 Vocal Coach App</h4>
+          <p class="text-sm">Train your voice with AI-based feedback.</p>
+        </div>
+        <button class="bg-pink-400 px-4 py-2 rounded text-black font-semibold">Download</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm py-4 mt-10 border-t border-purple-800 bg-black bg-opacity-50">
+    &copy; 2025 Avenue Media. All rights reserved.
+  </footer>
+
+  <!-- JavaScript to simulate play counters -->
+  <script>
+    const musicPlays = [0, 0, 0];
+    const videoPlays = [0, 0, 0];
+
+    document.querySelectorAll("audio").forEach((audio, i) => {
+      audio.addEventListener("play", () => {
+        musicPlays[i]++;
+        document.getElementById("plays" + (i + 1)).textContent = musicPlays[i];
+      });
+    });
+
+    document.querySelectorAll("video").forEach((video, i) => {
+      video.addEventListener("play", () => {
+        videoPlays[i]++;
+        document.getElementById("videoPlays" + (i + 1)).textContent = videoPlays[i];
+      });
+    });
+  </script>
+
+</body>
+</html>
