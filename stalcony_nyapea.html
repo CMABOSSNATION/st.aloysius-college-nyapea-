@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Aloysius College Nyapea (STALCONY) – Zombo, Uganda</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --maroon:   #6B0F1A;
+  --crimson:  #8B1A2C;
+  --gold:     #C8962E;
+  --gold2:    #E4B84A;
+  --navy:     #0D1B2A;
+  --forest:   #1A3A2A;
+  --ivory:    #FAF8F3;
+  --cream:    #F5F0E8;
+  --parchment:#EDE5D0;
+  --white:    #FFFFFF;
+  --charcoal: #1E1E2E;
+  --gray:     #6B7280;
+  --lgray:    #F0ECE4;
+  --wa-green: #25D366;
+  --wa-dark:  #128C7E;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--ivory);color:var(--charcoal);overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes zoomIn{from{transform:scale(1);}to{transform:scale(1.07);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}70%{box-shadow:0 0 0 14px rgba(37,211,102,0);}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-50px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(50px);}to{opacity:1;transform:translateX(0);}}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes countUp{from{opacity:0;}to{opacity:1;}}
+@keyframes ripple{to{transform:scale(4);opacity:0;}}
+@keyframes waPop{0%{transform:scale(0.8);}50%{transform:scale(1.15);}100%{transform:scale(1);}}
+
+/* ══ NEWS TICKER ══════════════════════════════ */
+.ticker-bar{
+  background:var(--maroon);
+  color:white;
+  padding:9px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  position:relative;
+  z-index:1001;
+}
+.ticker-label{
+  background:var(--gold);
+  color:var(--navy);
+  font-weight:800;
+  font-size:0.72rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:4px 14px;
+  position:absolute;
+  left:0;top:0;bottom:0;
+  display:flex;align-items:center;
+  z-index:2;
+}
+.ticker-track{
+  display:inline-flex;
+  animation:ticker 30s linear infinite;
+  padding-left:160px;
+}
+.ticker-track span{
+  padding:0 40px;
+  font-size:0.8rem;
+  font-weight:500;
+  color:rgba(255,255,255,0.9);
+}
+.ticker-track span::before{content:'⚜ ';color:var(--gold2);}
+
+/* ══ TOP BAR ══════════════════════════════════ */
+.topbar{
+  background:var(--navy);
+  color:rgba(255,255,255,0.7);
+  font-size:0.78rem;
+  padding:8px 5vw;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;flex-wrap:wrap;
+}
+.topbar a{color:var(--gold2);text-decoration:none;transition:color 0.2s;}
+.topbar a:hover{color:white;}
+.tb-left{display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+.tb-right{display:flex;gap:10px;align-items:center;}
+.tb-social{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.72rem;text-decoration:none;color:rgba(255,255,255,0.65);
+  transition:all 0.25s;
+}
+.tb-social:hover{background:var(--gold);color:var(--navy);}
+.tb-wa-pill{
+  display:flex;align-items:center;gap:6px;
+  background:var(--wa-green);
+  color:white;
+  padding:4px 12px;border-radius:20px;
+  font-size:0.75rem;font-weight:700;
+  text-decoration:none;
+  transition:all 0.25s;
+  animation:pulse 2s infinite;
+}
+.tb-wa-pill:hover{background:var(--wa-dark);color:white;}
+
+/* ══ NAVBAR ═══════════════════════════════════ */
+nav{
+  position:sticky;top:0;z-index:999;
+  background:rgba(250,248,243,0.97);
+  backdrop-filter:blur(18px);
+  border-bottom:3px solid var(--maroon);
+  padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  height:74px;
+  box-shadow:0 4px 30px rgba(107,15,26,0.1);
+}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-shield{
+  width:50px;height:58px;
+  background:linear-gradient(160deg,var(--maroon),var(--crimson));
+  clip-path:polygon(50% 0%,100% 15%,100% 70%,50% 100%,0% 70%,0% 15%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;flex-shrink:0;
+}
+.nav-shield::after{
+  content:'';position:absolute;inset:4px;
+  clip-path:polygon(50% 0%,100% 15%,100% 70%,50% 100%,0% 70%,0% 15%);
+  border:1.5px solid rgba(201,150,46,0.5);
+}
+.nav-shield span{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;font-weight:900;
+  color:var(--gold2);position:relative;z-index:1;
+}
+.nav-brand{line-height:1.15;}
+.nav-brand strong{
+  display:block;font-family:'Playfair Display',serif;
+  font-size:0.95rem;font-weight:800;color:var(--maroon);
+}
+.nav-brand em{
+  font-style:normal;font-size:0.68rem;
+  color:var(--gold);font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+}
+.nav-links{display:flex;list-style:none;gap:2px;align-items:center;}
+.nav-links a{
+  color:var(--charcoal);text-decoration:none;
+  font-size:0.85rem;font-weight:500;
+  padding:7px 13px;border-radius:6px;
+  transition:all 0.25s;
+}
+.nav-links a:hover{color:var(--maroon);background:rgba(107,15,26,0.06);}
+.nav-wa{
+  background:var(--wa-green)!important;
+  color:white!important;font-weight:700!important;
+  padding:8px 18px!important;border-radius:25px!important;
+  display:flex!important;align-items:center!important;gap:6px!important;
+}
+.nav-wa:hover{background:var(--wa-dark)!important;transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,0.35)!important;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+.ham span{width:24px;height:2px;background:var(--maroon);border-radius:2px;transition:all 0.3s;}
+
+/* ══ HERO ══════════════════════════════════════ */
+.hero{
+  height:100vh;min-height:680px;
+  position:relative;display:flex;align-items:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(125deg,rgba(13,27,42,0.92) 0%,rgba(107,15,26,0.78) 50%,rgba(13,27,42,0.88) 100%),
+    url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1800&q=90') center/cover no-repeat;
+  animation:zoomIn 24s ease-in-out infinite alternate;
+}
+/* cross pattern overlay */
+.hero-pattern{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,150,46,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,150,46,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  z-index:1;
+}
+.hero-content{
+  position:relative;z-index:3;
+  max-width:820px;padding:0 7vw;
+  animation:fadeUp 1.2s ease forwards;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(201,150,46,0.15);
+  border:1px solid rgba(201,150,46,0.4);
+  color:var(--gold2);
+  font-size:0.73rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  padding:7px 18px;border-radius:30px;
+  margin-bottom:28px;
+}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--gold2);animation:float 2s ease-in-out infinite;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,6.5vw,5.8rem);
+  font-weight:900;color:white;
+  line-height:1.05;margin-bottom:8px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.4);
+}
+.hero h1 .gold{color:var(--gold2);}
+.hero-sub{
+  font-family:'EB Garamond',serif;
+  font-size:clamp(1rem,2.3vw,1.4rem);
+  color:rgba(255,255,255,0.72);
+  font-style:italic;margin-bottom:16px;
+  letter-spacing:0.03em;
+}
+.hero-motto-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(107,15,26,0.7);
+  border:1px solid rgba(201,150,46,0.3);
+  color:var(--gold2);
+  font-family:'EB Garamond',serif;
+  font-size:1rem;font-style:italic;
+  padding:8px 20px;border-radius:30px;
+  margin-bottom:38px;
+  backdrop-filter:blur(6px);
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--maroon),var(--crimson));
+  color:white;font-weight:700;font-size:0.87rem;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:15px 36px;border-radius:3px;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;top:50%;left:50%;
+  width:0;height:0;border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  transform:translate(-50%,-50%);
+  transition:width 0.5s,height 0.5s;
+}
+.btn-primary:hover::after{width:300px;height:300px;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(107,15,26,0.5);}
+.btn-wa{
+  background:var(--wa-green);
+  color:white;font-weight:700;font-size:0.87rem;
+  letter-spacing:0.04em;
+  padding:14px 32px;border-radius:3px;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-wa:hover{background:var(--wa-dark);transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,0.4);}
+/* hero floating panel */
+.hero-panel{
+  position:absolute;right:6vw;bottom:80px;z-index:3;
+  background:rgba(13,27,42,0.88);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(201,150,46,0.3);
+  border-radius:14px;padding:28px 32px;
+  min-width:240px;
+  animation:fadeIn 1.5s 0.6s ease forwards;opacity:0;
+}
+.hp-title{font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;}
+.hp-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.07);}
+.hp-item:last-child{border-bottom:none;}
+.hp-icon{font-size:1.1rem;}
+.hp-text strong{display:block;font-size:0.82rem;color:white;font-weight:600;}
+.hp-text span{font-size:0.72rem;color:rgba(255,255,255,0.5);}
+/* stats ribbon */
+.stats-ribbon{
+  position:absolute;bottom:0;left:0;right:0;z-index:3;
+  display:flex;
+  background:rgba(107,15,26,0.9);
+  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(201,150,46,0.25);
+}
+.srib{flex:1;padding:16px 20px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);}
+.srib:last-child{border-right:none;}
+.srib strong{display:block;font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold2);font-weight:800;line-height:1;}
+.srib span{font-size:0.68rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;display:block;}
+
+/* ══ SECTION COMMONS ═══════════════════════════ */
+section{padding:88px 6vw;}
+.sec-eyebrow{
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);
+  display:flex;align-items:center;gap:10px;margin-bottom:12px;
+}
+.sec-eyebrow::before{content:'';width:26px;height:2px;background:var(--gold);}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.8vw,3rem);
+  font-weight:900;color:var(--maroon);
+  line-height:1.18;margin-bottom:18px;
+}
+.sec-title .it{font-style:italic;color:var(--crimson);}
+.sec-desc{font-size:1rem;color:var(--gray);line-height:1.82;max-width:600px;font-weight:300;}
+.gold-bar{width:52px;height:3.5px;background:linear-gradient(90deg,var(--maroon),var(--gold));border-radius:2px;margin:16px 0 28px;}
+.center-header{text-align:center;}
+.center-header .sec-eyebrow{justify-content:center;}
+.center-header .sec-eyebrow::before{display:none;}
+.center-header .gold-bar{margin:16px auto 28px;}
+
+/* ══ ABOUT ═════════════════════════════════════ */
+.about-sec{background:var(--cream);padding:0;}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;min-height:640px;}
+.about-visual{position:relative;overflow:hidden;}
+.about-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s ease;}
+.about-visual:hover img{transform:scale(1.04);}
+.about-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(107,15,26,0.25),transparent 60%);}
+.legacy-badge{
+  position:absolute;bottom:28px;left:28px;
+  background:rgba(13,27,42,0.93);
+  border:1px solid rgba(201,150,46,0.5);
+  backdrop-filter:blur(10px);
+  color:white;padding:18px 22px;border-radius:10px;
+  text-align:center;
+}
+.legacy-badge strong{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--gold2);display:block;line-height:1;}
+.legacy-badge span{font-size:0.68rem;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase;}
+.stalcony-tag{
+  position:absolute;top:24px;right:24px;
+  background:var(--maroon);color:white;
+  font-weight:800;font-size:0.85rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  padding:8px 18px;border-radius:30px;
+  border:2px solid var(--gold2);
+}
+.about-text{padding:72px 64px;display:flex;flex-direction:column;justify-content:center;background:var(--ivory);}
+.quote-block{
+  border-left:4px solid var(--gold);
+  background:var(--cream);
+  padding:16px 20px;border-radius:0 10px 10px 0;
+  margin:24px 0;
+  font-family:'EB Garamond',serif;
+  font-size:1.08rem;font-style:italic;
+  color:var(--maroon);line-height:1.7;
+}
+.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;}
+.fact-card{
+  padding:16px 18px;background:var(--white);
+  border-radius:10px;border-top:3px solid var(--gold);
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+  transition:all 0.3s;
+}
+.fact-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.1);border-top-color:var(--maroon);}
+.fact-icon{font-size:1.5rem;margin-bottom:6px;}
+.fact-card h4{font-weight:700;font-size:0.88rem;color:var(--maroon);margin-bottom:2px;}
+.fact-card p{font-size:0.78rem;color:var(--gray);}
+
+/* ══ LEGACY ALUMNI ══════════════════════════════ */
+.alumni-sec{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--maroon) 100%);
+  color:white;text-align:center;
+  position:relative;overflow:hidden;
+}
+.alumni-sec::before{
+  content:'"STALCONY"';
+  position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+  font-family:'Playfair Display',serif;font-size:18rem;font-weight:900;
+  color:rgba(255,255,255,0.02);pointer-events:none;user-select:none;
+  white-space:nowrap;
+}
+.alumni-sec .sec-eyebrow{justify-content:center;color:var(--gold2);}
+.alumni-sec .sec-eyebrow::before{background:var(--gold2);}
+.alumni-sec .sec-title{color:white;}
+.alumni-sec .sec-title .it{color:var(--gold2);}
+.alumni-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;margin-top:52px;
+}
+.alumni-card{
+  padding:28px 22px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(201,150,46,0.2);
+  border-radius:12px;
+  backdrop-filter:blur(8px);
+  transition:all 0.4s;
+}
+.alumni-card:hover{background:rgba(201,150,46,0.1);border-color:var(--gold2);transform:translateY(-8px);}
+.alumni-emoji{font-size:2rem;margin-bottom:12px;}
+.alumni-card h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold2);margin-bottom:6px;}
+.alumni-card p{font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.55;}
+.alumni-card .role{font-size:0.72rem;color:var(--gold);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;display:block;}
+
+/* ══ ACADEMICS ══════════════════════════════════ */
+.academics-sec{background:var(--ivory);}
+.academics-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:68px;align-items:start;}
+.subjects-list{margin-top:28px;display:grid;gap:12px;}
+.subject-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;background:var(--white);
+  border-radius:10px;border-left:4px solid var(--gold);
+  box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  transition:all 0.3s;cursor:default;
+}
+.subject-row:hover{border-left-color:var(--maroon);transform:translateX(6px);box-shadow:0 6px 24px rgba(0,0,0,0.09);}
+.subj-icon{font-size:1.3rem;flex-shrink:0;}
+.subj-info h4{font-weight:700;font-size:0.9rem;color:var(--maroon);}
+.subj-info p{font-size:0.78rem;color:var(--gray);}
+.subj-badge{
+  margin-left:auto;background:var(--maroon);color:white;
+  font-size:0.62rem;font-weight:800;letter-spacing:0.08em;
+  text-transform:uppercase;padding:3px 9px;border-radius:20px;
+  flex-shrink:0;
+}
+.level-tabs{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
+.ltab{
+  padding:9px 22px;border-radius:25px;
+  font-size:0.82rem;font-weight:700;
+  border:2px solid var(--maroon);
+  cursor:pointer;transition:all 0.25s;text-decoration:none;
+}
+.ltab.active,.ltab:hover{background:var(--maroon);color:white;}
+.ltab{color:var(--maroon);}
+.sports-grid-small{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.sport-card{
+  padding:16px;text-align:center;
+  background:var(--white);border-radius:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  border-bottom:3px solid var(--gold);
+  transition:all 0.3s;cursor:default;
+}
+.sport-card:hover{transform:translateY(-5px);border-bottom-color:var(--maroon);}
+.sport-card .s-emoji{font-size:1.8rem;margin-bottom:6px;}
+.sport-card p{font-size:0.78rem;font-weight:600;color:var(--maroon);}
+
+/* ══ GALLERY ════════════════════════════════════ */
+.gallery-sec{background:var(--navy);padding:80px 0;}
+.gallery-header{padding:0 6vw;margin-bottom:40px;}
+.gallery-header .sec-title{color:white;}
+.gallery-header .sec-eyebrow{color:var(--gold2);}
+.gallery-header .sec-eyebrow::before{background:var(--gold2);}
+.gallery-masonry{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto;
+  gap:10px;
+  padding:0 6vw;
+}
+.gm-item{
+  border-radius:10px;overflow:hidden;
+  position:relative;cursor:pointer;
+  transition:transform 0.3s;
+}
+.gm-item:hover{transform:scale(1.02);z-index:2;}
+.gm-item.tall{grid-row:span 2;}
+.gm-item.wide{grid-column:span 2;}
+.gm-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
+.gm-item:hover img{transform:scale(1.07);}
+.gm-caption{
+  position:absolute;inset:0;
+  background:linear-gradient(transparent 40%,rgba(107,15,26,0.88));
+  opacity:0;transition:opacity 0.3s;
+  display:flex;align-items:flex-end;
+  padding:16px;
+}
+.gm-item:hover .gm-caption{opacity:1;}
+.gm-caption span{color:white;font-weight:700;font-size:0.85rem;font-family:'Playfair Display',serif;}
+.gallery-cta{padding:28px 6vw 0;text-align:center;}
+.gallery-cta p{color:rgba(255,255,255,0.5);font-size:0.85rem;}
+
+/* ══ OLD BOYS ASSOCIATION ═══════════════════════ */
+.oba-sec{background:var(--cream);}
+.oba-layout{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center;}
+.oba-imgs{position:relative;}
+.oba-main{border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(107,15,26,0.2);border:4px solid var(--gold);}
+.oba-main img{width:100%;height:360px;object-fit:cover;display:block;}
+.oba-inset{
+  position:absolute;bottom:-22px;right:-20px;width:155px;
+  border-radius:10px;overflow:hidden;
+  border:3px solid white;box-shadow:0 8px 28px rgba(0,0,0,0.18);
+}
+.oba-inset img{width:100%;height:115px;object-fit:cover;display:block;}
+.oba-stamp{
+  position:absolute;top:-16px;left:16px;
+  background:var(--maroon);color:white;
+  font-family:'Playfair Display',serif;
+  font-size:0.68rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:7px 16px;border-radius:20px;
+  border:2px solid var(--gold2);
+}
+.oba-achievements{display:grid;gap:14px;margin-top:30px;}
+.oba-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;background:var(--white);
+  border-radius:10px;box-shadow:0 2px 14px rgba(0,0,0,0.06);
+  transition:all 0.3s;border-right:3px solid transparent;
+}
+.oba-item:hover{border-right-color:var(--gold);transform:translateX(-4px);}
+.oba-bullet{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--maroon),var(--crimson));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.oba-item h4{font-weight:700;font-size:0.9rem;color:var(--maroon);margin-bottom:3px;}
+.oba-item p{font-size:0.8rem;color:var(--gray);line-height:1.5;}
+
+/* ══ NEWS / UPDATES ══════════════════════════════ */
+.news-sec{background:var(--ivory);}
+.news-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:46px;}
+.news-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:22px;}
+.news-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+  transition:all 0.4s;border:1px solid rgba(0,0,0,0.04);
+}
+.news-card:hover{transform:translateY(-7px);box-shadow:0 22px 54px rgba(0,0,0,0.12);}
+.nc-img{overflow:hidden;position:relative;}
+.nc-img img{width:100%;object-fit:cover;display:block;transition:transform 0.5s;}
+.news-card:hover .nc-img img{transform:scale(1.06);}
+.news-card.featured .nc-img img{height:250px;}
+.news-card:not(.featured) .nc-img img{height:160px;}
+.nc-tag{
+  position:absolute;top:12px;left:12px;
+  background:var(--maroon);color:white;
+  font-size:0.64rem;font-weight:800;letter-spacing:0.1em;
+  text-transform:uppercase;padding:4px 10px;border-radius:20px;
+}
+.nc-body{padding:20px;}
+.nc-date{font-size:0.72rem;color:var(--gray);margin-bottom:7px;}
+.nc-body h3{
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:var(--maroon);margin-bottom:8px;line-height:1.3;
+}
+.news-card.featured .nc-body h3{font-size:1.2rem;}
+.news-card:not(.featured) .nc-body h3{font-size:0.98rem;}
+.nc-body p{font-size:0.84rem;color:var(--gray);line-height:1.6;}
+.nc-link{
+  display:inline-flex;align-items:center;gap:5px;
+  color:var(--gold);font-size:0.8rem;font-weight:700;
+  text-decoration:none;margin-top:12px;
+  transition:gap 0.3s;
+}
+.nc-link:hover{gap:10px;}
+
+/* ══ ADMISSIONS CTA ══════════════════════════════ */
+.admissions-sec{
+  background:
+    linear-gradient(rgba(13,27,42,0.93),rgba(107,15,26,0.87)),
+    url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&q=85') center/cover no-repeat fixed;
+  padding:96px 6vw;
+  text-align:center;
+  color:white;
+}
+.admissions-sec .sec-eyebrow{justify-content:center;color:var(--gold2);}
+.admissions-sec .sec-eyebrow::before{background:var(--gold2);}
+.admissions-sec .sec-title{color:white;text-align:center;}
+.admissions-sec .sec-title .it{color:var(--gold2);}
+.admissions-sec p{
+  color:rgba(255,255,255,0.7);font-size:1.05rem;
+  max-width:580px;margin:0 auto 44px;line-height:1.8;
+}
+.adm-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--navy);font-weight:800;font-size:0.88rem;
+  letter-spacing:0.05em;text-transform:uppercase;
+  padding:16px 38px;border-radius:3px;
+  text-decoration:none;
+  transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;
+  border:none;cursor:pointer;
+}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(201,150,46,0.5);}
+.adm-info-pills{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px;
+}
+.adm-pill{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.8);
+  font-size:0.82rem;font-weight:600;
+  padding:9px 18px;border-radius:25px;
+  backdrop-filter:blur(8px);
+}
+
+/* ══ CONTACT ═════════════════════════════════════ */
+.contact-sec{background:var(--cream);}
+.contact-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start;}
+.contact-cards{display:grid;gap:16px;margin-top:30px;}
+.c-card{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;background:var(--white);
+  border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,0.06);
+  text-decoration:none;color:inherit;
+  transition:all 0.3s;border-left:4px solid var(--gold);
+}
+.c-card:hover{transform:translateX(6px);box-shadow:0 8px 30px rgba(0,0,0,0.1);border-left-color:var(--maroon);}
+.c-icon{
+  width:44px;height:44px;border-radius:11px;
+  background:linear-gradient(135deg,var(--maroon),var(--crimson));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.c-card h4{font-size:0.7rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
+.c-card p{font-size:0.92rem;color:var(--charcoal);font-weight:500;line-height:1.5;}
+.social-follow{margin-top:26px;}
+.social-follow h4{font-family:'Playfair Display',serif;font-size:0.9rem;color:var(--maroon);font-weight:700;margin-bottom:12px;}
+.soc-pills{display:flex;gap:10px;flex-wrap:wrap;}
+.soc-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border-radius:25px;
+  font-size:0.78rem;font-weight:700;text-decoration:none;
+  transition:all 0.3s;
+}
+.soc-fb{background:#1877F2;color:white;}
+.soc-fb:hover{background:#0d5fd4;transform:translateY(-3px);}
+.soc-tw{background:#000;color:white;}
+.soc-tw:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.3);}
+.soc-yt{background:#FF0000;color:white;}
+.soc-yt:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(255,0,0,0.3);}
+.map-wrap{border-radius:16px;overflow:hidden;box-shadow:0 12px 48px rgba(107,15,26,0.15);border:3px solid var(--gold);}
+.map-wrap iframe{display:block;width:100%;height:380px;border:none;}
+.map-footer{background:var(--navy);padding:13px 18px;display:flex;align-items:center;gap:9px;color:rgba(255,255,255,0.75);font-size:0.82rem;}
+.map-footer span{color:var(--gold2);font-weight:700;}
+
+/* ══ WHATSAPP FLOATING BUTTON ════════════════════ */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:9998;
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+}
+.wa-tooltip{
+  background:var(--navy);color:white;
+  font-size:0.78rem;font-weight:600;
+  padding:8px 16px;border-radius:20px;
+  white-space:nowrap;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  display:none;
+  animation:fadeIn 0.3s ease;
+}
+.wa-float:hover .wa-tooltip{display:block;}
+.wa-btn{
+  width:60px;height:60px;border-radius:50%;
+  background:var(--wa-green);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;
+  box-shadow:0 6px 28px rgba(37,211,102,0.5);
+  animation:pulse 2.5s infinite,waPop 0.5s ease;
+  transition:all 0.3s;
+  font-size:1.8rem;
+}
+.wa-btn:hover{background:var(--wa-dark);transform:scale(1.1);box-shadow:0 10px 36px rgba(37,211,102,0.6);}
+
+/* ══ FOOTER ══════════════════════════════════════ */
+footer{background:var(--navy);color:rgba(255,255,255,0.65);padding:64px 6vw 28px;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.f-brand-col{}
+.f-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.f-shield{
+  width:42px;height:48px;
+  background:linear-gradient(160deg,var(--maroon),var(--crimson));
+  clip-path:polygon(50% 0%,100% 15%,100% 70%,50% 100%,0% 70%,0% 15%);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.f-shield span{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:var(--gold2);}
+.f-school{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:800;color:white;line-height:1.2;}
+.f-loc{font-size:0.68rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;}
+.f-brand-col p{font-size:0.86rem;line-height:1.75;max-width:260px;margin-bottom:20px;}
+.stalcony-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(201,150,46,0.1);border:1px solid rgba(201,150,46,0.3);
+  color:var(--gold2);font-family:'Playfair Display',serif;
+  font-size:0.78rem;font-weight:700;letter-spacing:0.06em;
+  padding:7px 16px;border-radius:20px;font-style:italic;
+}
+.f-col h5{
+  font-family:'Playfair Display',serif;font-size:0.82rem;
+  color:var(--gold2);letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:18px;padding-bottom:10px;
+  border-bottom:1px solid rgba(201,150,46,0.2);
+}
+.f-col ul{list-style:none;display:grid;gap:10px;}
+.f-col ul a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.86rem;transition:all 0.25s;}
+.f-col ul a:hover{color:var(--gold2);padding-left:4px;}
+.footer-bottom{
+  padding-top:24px;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:0.77rem;color:rgba(255,255,255,0.32);
+}
+.footer-bottom a{color:var(--gold);text-decoration:none;}
+
+/* ══ LIGHTBOX ════════════════════════════════════ */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:10000;display:none;align-items:center;justify-content:center;}
+.lightbox.on{display:flex;}
+.lb-img-wrap{position:relative;}
+.lb-img-wrap img{max-width:90vw;max-height:84vh;border-radius:8px;object-fit:contain;border:2px solid rgba(201,150,46,0.35);}
+.lb-close{position:absolute;top:-40px;right:0;color:white;font-size:2rem;cursor:pointer;opacity:0.7;transition:0.2s;line-height:1;}
+.lb-close:hover{opacity:1;color:var(--gold2);}
+.lb-cap{
+  position:absolute;bottom:-38px;left:0;right:0;text-align:center;
+  color:rgba(255,255,255,0.6);font-size:0.8rem;font-style:italic;
+}
+
+/* ══ SCROLL REVEAL ════════════════════════════════ */
+.rev{opacity:0;transform:translateY(38px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.rev-l{opacity:0;transform:translateX(-38px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.rev-r{opacity:0;transform:translateX(38px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.rev.on,.rev-l.on,.rev-r.on{opacity:1;transform:none;}
+
+/* ══ MOBILE MENU ══════════════════════════════════ */
+.mob-menu{
+  display:none;position:fixed;top:74px;left:0;right:0;
+  background:var(--ivory);z-index:998;
+  padding:20px 5vw;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  border-top:1px solid rgba(107,15,26,0.1);
+  flex-direction:column;gap:4px;
+}
+.mob-menu a{
+  color:var(--charcoal);text-decoration:none;
+  font-size:0.92rem;font-weight:500;
+  padding:11px 14px;border-radius:8px;
+  transition:all 0.2s;display:block;
+}
+.mob-menu a:hover{background:var(--cream);color:var(--maroon);}
+.mob-menu a.wa-m{background:var(--wa-green);color:white;font-weight:700;margin-top:8px;border-radius:8px;}
+
+/* ══ RESPONSIVE ════════════════════════════════════ */
+@media(max-width:1000px){
+  .hero-panel{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-visual{height:320px;}
+  .about-text{padding:50px 6vw;}
+  .alumni-grid{grid-template-columns:1fr 1fr;}
+  .academics-layout{grid-template-columns:1fr;}
+  .gallery-masonry{grid-template-columns:1fr 1fr;}
+  .gm-item.tall{grid-row:span 1;}
+  .gm-item.wide{grid-column:span 1;}
+  .oba-layout{grid-template-columns:1fr;}
+  .oba-inset{display:none;}
+  .news-grid{grid-template-columns:1fr;}
+  .contact-layout{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .stats-ribbon .srib strong{font-size:1.1rem;}
+  .nav-links{display:none;}
+  .ham{display:flex;}
+}
+@media(max-width:600px){
+  .alumni-grid{grid-template-columns:1fr;}
+  .sports-grid-small{grid-template-columns:1fr 1fr;}
+  .gallery-masonry{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .stats-ribbon{flex-wrap:wrap;}
+  .adm-btns{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ░░ NEWS TICKER ░░ -->
+<div class="ticker-bar">
+  <div class="ticker-label">📢 Latest</div>
+  <div class="ticker-track">
+    <span>2025 Admissions Now Open – S.1 &amp; S.5 Entry</span>
+    <span>New Classroom Blocks Commissioned – UGX 308 Million Investment</span>
+    <span>STALCONY Old Boys Association Scholarship Applications Open</span>
+    <span>Enrollment Surpasses 400 Students – Up from 97 in 2017!</span>
+    <span>Government Pledges UGX 7 Billion for School Renovation</span>
+    <span>St. Aloysius College – The Elephant of West Nile Returns!</span>
+    <span>2025 Admissions Now Open – S.1 &amp; S.5 Entry</span>
+    <span>New Classroom Blocks Commissioned – UGX 308 Million Investment</span>
+    <span>STALCONY Old Boys Association Scholarship Applications Open</span>
+    <span>Enrollment Surpasses 400 Students – Up from 97 in 2017!</span>
+    <span>Government Pledges UGX 7 Billion for School Renovation</span>
+    <span>St. Aloysius College – The Elephant of West Nile Returns!</span>
+  </div>
+</div>
+
+<!-- ░░ TOP BAR ░░ -->
+<div class="topbar">
+  <div class="tb-left">
+    <span>📍 Nyapea Sub-county, Zombo District, Uganda</span>
+    <span>📮 P.O. Box 71, Paidha, Zombo</span>
+    <a href="https://www.stalcony.ac.ug/wp" target="_blank">🌐 www.stalcony.ac.ug</a>
+  </div>
+  <div class="tb-right">
+    <a href="https://wa.me/256700000000?text=Hello%20STALCONY%2C%20I%20would%20like%20to%20inquire%20about%20admissions." target="_blank" class="tb-wa-pill">
+      💬 WhatsApp Us
+    </a>
+    <a href="https://www.facebook.com/p/St-Aloysius-College-Nyapea-Stalcony-100064878826005/" target="_blank" class="tb-social">f</a>
+    <a href="https://twitter.com/CollegeNyapea" target="_blank" class="tb-social">𝕏</a>
+  </div>
+</div>
+
+<!-- ░░ NAVBAR ░░ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-shield"><span>SA</span></div>
+    <div class="nav-brand">
+      <strong>St. Aloysius College Nyapea</strong>
+      <em>STALCONY · Est. 1938 · Zombo, Uganda</em>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#academics">Academics</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#oba">Old Boys</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <a href="https://wa.me/256700000000?text=Hello%20STALCONY%2C%20I%20would%20like%20to%20inquire%20about%20admissions." target="_blank" class="nav-wa">
+        💬 WhatsApp
+      </a>
+    </li>
+  </ul>
+  <div class="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="toggleMenu()">About STALCONY</a>
+  <a href="#academics" onclick="toggleMenu()">Academics</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#oba" onclick="toggleMenu()">Old Boys Association</a>
+  <a href="#news" onclick="toggleMenu()">News &amp; Updates</a>
+  <a href="#contact" onclick="toggleMenu()">Contact &amp; Location</a>
+  <a href="https://wa.me/256700000000" target="_blank" class="wa-m">💬 Chat on WhatsApp</a>
+</div>
+
+<!-- ░░ HERO ░░ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-dot"></div>
+      STALCONY · Founded 1938 · Brothers of the Sacred Heart
+    </div>
+    <h1>The <span class="gold">Elephant</span><br>of West Nile</h1>
+    <p class="hero-sub">Boys' Boarding School of Excellence · Nyapea, Zombo District, Uganda</p>
+    <div class="hero-motto-pill">
+      ⚜ "Dikiri en Etego" — Rising to Former Glory
+    </div>
+    <div class="hero-btns">
+      <a href="#admissions" class="btn-primary">📚 Apply for Admission</a>
+      <a href="https://wa.me/256700000000?text=Hello%20STALCONY%2C%20I%20would%20like%20to%20inquire%20about%20admissions%20for%202025." target="_blank" class="btn-wa">
+        💬 WhatsApp Enquiry
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating info panel -->
+  <div class="hero-panel">
+    <div class="hp-title">📌 Quick Info</div>
+    <div class="hp-item">
+      <span class="hp-icon">🏫</span>
+      <div class="hp-text"><strong>Boys Only Boarding</strong><span>Government Aided Secondary</span></div>
+    </div>
+    <div class="hp-item">
+      <span class="hp-icon">✝️</span>
+      <div class="hp-text"><strong>Catholic Founded</strong><span>Brothers of the Sacred Heart</span></div>
+    </div>
+    <div class="hp-item">
+      <span class="hp-icon">📍</span>
+      <div class="hp-text"><strong>Nyapea, Zombo</strong><span>West Nile Sub-region</span></div>
+    </div>
+    <div class="hp-item">
+      <span class="hp-icon">📮</span>
+      <div class="hp-text"><strong>P.O. Box 71, Paidha</strong><span>Zombo District</span></div>
+    </div>
+    <div class="hp-item">
+      <span class="hp-icon">🌐</span>
+      <div class="hp-text"><strong>stalcony.ac.ug</strong><span>Official Website</span></div>
+    </div>
+  </div>
+
+  <!-- Stats ribbon -->
+  <div class="stats-ribbon">
+    <div class="srib"><strong>1938</strong><span>Year Founded</span></div>
+    <div class="srib"><strong>87+</strong><span>Years of Excellence</span></div>
+    <div class="srib"><strong>400+</strong><span>Students Enrolled</span></div>
+    <div class="srib"><strong>70+</strong><span>On Scholarship (2023)</span></div>
+    <div class="srib"><strong>S.1–S.6</strong><span>O &amp; A Level</span></div>
+  </div>
+</section>
+
+<!-- ░░ ABOUT ░░ -->
+<div class="about-sec" id="about">
+  <div class="about-grid">
+    <div class="about-visual rev-l">
+      <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&q=88" alt="St Aloysius College Nyapea Campus">
+      <div class="about-overlay"></div>
+      <div class="stalcony-tag">STALCONY</div>
+      <div class="legacy-badge">
+        <strong>1938</strong>
+        <span>Established</span>
+      </div>
+    </div>
+    <div class="about-text rev-r">
+      <div class="sec-eyebrow">Our Heritage &amp; Story</div>
+      <h2 class="sec-title">The <span class="it">Elephant of the Region</span> — Rising Again</h2>
+      <div class="gold-bar"></div>
+      <p class="sec-desc">
+        St. Aloysius College Nyapea (STALCONY) was founded in <strong>1938</strong> in Gulu District by the <strong>Brothers of the Sacred Heart</strong> (American Brothers) and later relocated to Nyapea in Zombo District, West Nile. For decades it was the undisputed academic giant of the region.
+      </p>
+      <div class="quote-block">
+        "A student who never studied at St. Aloysius College Nyapea was not considered by locals as a secondary student. Studying at Nyapea was a great prestige."
+      </div>
+      <p class="sec-desc">
+        After a period of difficulty, STALCONY is experiencing a powerful revival — driven by the <strong>Old Boys Association</strong>, government investment, and renewed community pride. Enrollment has grown from just <strong>97 students in 2017</strong> to over <strong>400 in 2023</strong>. The elephant is waking up!
+      </p>
+      <div class="about-facts">
+        <div class="fact-card">
+          <div class="fact-icon">🏛️</div>
+          <h4>Government Aided</h4>
+          <p>One of 7 government-aided secondary schools in Zombo District</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">✝️</div>
+          <h4>Catholic Heritage</h4>
+          <p>Founded by Brothers of the Sacred Heart — faith-based education</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🏠</div>
+          <h4>Boys Boarding Only</h4>
+          <p>Full residential boarding for S.1 through S.6 students</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🌍</div>
+          <h4>West Nile Pride</h4>
+          <p>Located near DR Congo border — 8km from Paidha town</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░ PROMINENT ALUMNI ░░ -->
+<section class="alumni-sec" id="alumni">
+  <div class="sec-eyebrow">Hall of Fame</div>
+  <h2 class="sec-title">Prominent <span class="it">Alumni of STALCONY</span></h2>
+  <p style="color:rgba(255,255,255,0.6);max-width:600px;margin:0 auto;font-size:1rem;line-height:1.8;">
+    Former students of Nyapea College include a Prime Minister, Cabinet Ministers, a renowned medical researcher, and many distinguished leaders across Uganda.
+  </p>
+  <div class="alumni-grid rev">
+    <div class="alumni-card">
+      <div class="alumni-emoji">🏛️</div>
+      <h4>George Cosmas Adyebo</h4>
+      <span class="role">Prime Minister of Uganda</span>
+      <p>Served as Prime Minister from January 1991 to November 1994 — STALCONY's most celebrated alumnus.</p>
+    </div>
+    <div class="alumni-card">
+      <div class="alumni-emoji">⚖️</div>
+      <h4>Kania Mario Obiga</h4>
+      <span class="role">State Minister – Internal Affairs</span>
+      <p>Member of Parliament for Terego County East, Arua District, in Uganda's 10th Parliament (2016–2021).</p>
+    </div>
+    <div class="alumni-card">
+      <div class="alumni-emoji">🔬</div>
+      <h4>Dr. Amos Nyathirombo</h4>
+      <span class="role">Medical Researcher &amp; OBA President</span>
+      <p>Conducted groundbreaking research on River Blindness. President of the STALCONY Old Boys Association.</p>
+    </div>
+    <div class="alumni-card">
+      <div class="alumni-emoji">💰</div>
+      <h4>Fred Omach</h4>
+      <span class="role">State Minister – Finance</span>
+      <p>Former State Minister for Finance (General Duties) in the Cabinet of Uganda.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ ACADEMICS ░░ -->
+<section class="academics-sec" id="academics">
+  <div class="academics-layout">
+    <div class="rev-l">
+      <div class="sec-eyebrow">Academic Programme</div>
+      <h2 class="sec-title">O &amp; A Level <span class="it">Education</span></h2>
+      <div class="gold-bar"></div>
+      <p class="sec-desc">STALCONY follows the Uganda National Examinations Board (UNEB) curriculum, preparing boys for UCE (O Level) and UACE (A Level) across all key subject areas.</p>
+      <div class="level-tabs" style="margin-top:22px;">
+        <a class="ltab active" href="#academics">O Level (S.1–S.4)</a>
+        <a class="ltab" href="#academics">A Level (S.5–S.6)</a>
+      </div>
+      <div class="subjects-list">
+        <div class="subject-row">
+          <span class="subj-icon">🔬</span>
+          <div class="subj-info"><h4>Sciences</h4><p>Mathematics, Physics, Chemistry, Biology</p></div>
+          <span class="subj-badge">Core</span>
+        </div>
+        <div class="subject-row">
+          <span class="subj-icon">📖</span>
+          <div class="subj-info"><h4>Arts &amp; Humanities</h4><p>History, Geography, CRE, Literature in English</p></div>
+          <span class="subj-badge">Core</span>
+        </div>
+        <div class="subject-row">
+          <span class="subj-icon">💬</span>
+          <div class="subj-info"><h4>Languages</h4><p>English Language, Kiswahili, Local Languages</p></div>
+          <span class="subj-badge">Core</span>
+        </div>
+        <div class="subject-row">
+          <span class="subj-icon">💼</span>
+          <div class="subj-info"><h4>Commerce &amp; Social Studies</h4><p>Commerce, Economics, Entrepreneurship</p></div>
+          <span class="subj-badge">Elective</span>
+        </div>
+        <div class="subject-row">
+          <span class="subj-icon">💻</span>
+          <div class="subj-info"><h4>ICT &amp; Computer Studies</h4><p>Computer Studies, Information Technology</p></div>
+          <span class="subj-badge">Elective</span>
+        </div>
+      </div>
+    </div>
+    <div class="rev-r">
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 16px 50px rgba(107,15,26,0.15);border:4px solid var(--gold);margin-bottom:28px;">
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=700&q=88" alt="Classroom at STALCONY" style="width:100%;height:280px;object-fit:cover;display:block;">
+      </div>
+      <div class="sec-eyebrow">Sports &amp; Athletics</div>
+      <p class="sec-desc" style="margin-bottom:18px;">STALCONY competes in inter-school games across West Nile. Our athletes are known throughout the region.</p>
+      <div class="sports-grid-small">
+        <div class="sport-card"><div class="s-emoji">⚽</div><p>Soccer/Football</p></div>
+        <div class="sport-card"><div class="s-emoji">🏃</div><p>Athletics / Track</p></div>
+        <div class="sport-card"><div class="s-emoji">🎾</div><p>Tennis</p></div>
+        <div class="sport-card"><div class="s-emoji">🏐</div><p>Volleyball</p></div>
+        <div class="sport-card"><div class="s-emoji">🏀</div><p>Basketball</p></div>
+        <div class="sport-card"><div class="s-emoji">🥊</div><p>Physical Ed.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ GALLERY ░░ -->
+<div class="gallery-sec" id="gallery">
+  <div class="gallery-header rev">
+    <div class="sec-eyebrow">Campus &amp; Life</div>
+    <h2 class="sec-title">STALCONY <span class="it">Photo Gallery</span></h2>
+    <p style="color:rgba(255,255,255,0.5);margin-top:8px;font-size:0.9rem;">Click any photo to view full size</p>
+  </div>
+  <div class="gallery-masonry rev">
+    <div class="gm-item tall" onclick="openLb(this,'Campus Main Block')">
+      <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=88" alt="Campus">
+      <div class="gm-caption"><span>Campus Grounds</span></div>
+    </div>
+    <div class="gm-item" onclick="openLb(this,'Students in Class')">
+      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&q=88" alt="Classroom">
+      <div class="gm-caption"><span>Classroom Learning</span></div>
+    </div>
+    <div class="gm-item" onclick="openLb(this,'Science Laboratory')">
+      <img src="https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=500&q=88" alt="Science Lab">
+      <div class="gm-caption"><span>Science Laboratory</span></div>
+    </div>
+    <div class="gm-item tall" onclick="openLb(this,'School Chapel')">
+      <img src="https://images.unsplash.com/photo-1538599785411-b9b21e04476b?w=600&q=88" alt="Chapel">
+      <div class="gm-caption"><span>School Chapel</span></div>
+    </div>
+    <div class="gm-item wide" onclick="openLb(this,'Students on Sports Day')">
+      <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?w=800&q=88" alt="Sports">
+      <div class="gm-caption"><span>Sports Day &amp; Athletics</span></div>
+    </div>
+    <div class="gm-item" onclick="openLb(this,'School Library')">
+      <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&q=88" alt="Library">
+      <div class="gm-caption"><span>School Library</span></div>
+    </div>
+    <div class="gm-item" onclick="openLb(this,'New Classroom Blocks 2023')">
+      <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=500&q=88" alt="New Blocks">
+      <div class="gm-caption"><span>New Classroom Blocks (2023)</span></div>
+    </div>
+    <div class="gm-item" onclick="openLb(this,'Boarding Dormitory')">
+      <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=500&q=88" alt="Dormitory">
+      <div class="gm-caption"><span>Boarding Dormitory</span></div>
+    </div>
+  </div>
+  <div class="gallery-cta">
+    <p>📸 Follow us on Facebook for more photos: <a href="https://www.facebook.com/p/St-Aloysius-College-Nyapea-Stalcony-100064878826005/" target="_blank" style="color:var(--gold2);text-decoration:none;font-weight:700;">St. Aloysius College Nyapea (STALCONY)</a></p>
+  </div>
+</div>
+
+<!-- ░░ OLD BOYS ASSOCIATION ░░ -->
+<section class="oba-sec" id="oba">
+  <div class="oba-layout">
+    <div class="oba-imgs rev-l">
+      <div class="oba-stamp">Old Boys Association</div>
+      <div class="oba-main">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=700&q=88" alt="Old Boys Association STALCONY">
+      </div>
+      <div class="oba-inset">
+        <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=300&q=85" alt="OBA activities">
+      </div>
+    </div>
+    <div class="rev-r">
+      <div class="sec-eyebrow">Alumni Power</div>
+      <h2 class="sec-title">STALCONY <span class="it">Old Boys Association</span></h2>
+      <div class="gold-bar"></div>
+      <p class="sec-desc">
+        Since 2019, the STALCONY Old Boys Association has been driving a powerful revival of the college — from scholarships to dormitory renovations. Led by President <strong>Dr. Amos Nyathirombo</strong>, they are restoring the school's legendary status one project at a time.
+      </p>
+      <div class="oba-achievements">
+        <div class="oba-item">
+          <div class="oba-bullet">🎓</div>
+          <div>
+            <h4>Student Bursary Scheme</h4>
+            <p>Over 70 students enrolled on scholarship by 2023. Partial fee coverage for brilliant but needy students from PLE and UCE.</p>
+          </div>
+        </div>
+        <div class="oba-item">
+          <div class="oba-bullet">🏠</div>
+          <div>
+            <h4>Dormitory Renovation</h4>
+            <p>4 out of 7 dormitories facelifted by the OBA. Mattresses, uniforms, and clothing provided to students in need.</p>
+          </div>
+        </div>
+        <div class="oba-item">
+          <div class="oba-bullet">🏫</div>
+          <div>
+            <h4>New Classroom Blocks (2023)</h4>
+            <p>2 blocks of 5 classrooms each commissioned in October 2023, funded by Government at UGX 308 million.</p>
+          </div>
+        </div>
+        <div class="oba-item">
+          <div class="oba-bullet">📈</div>
+          <div>
+            <h4>Enrollment Growth</h4>
+            <p>Student numbers grew from just 97 in 2017 to over 400 in 2023 — a 4x increase driven by revival efforts.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px;">
+        <a href="https://wa.me/256700000000?text=Hello%2C%20I%20would%20like%20to%20join%20the%20STALCONY%20Old%20Boys%20Association." target="_blank" class="btn-primary" style="font-size:0.84rem;padding:13px 28px;">
+          🤝 Join the Old Boys Association
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ NEWS & UPDATES ░░ -->
+<section class="news-sec" id="news">
+  <div class="news-header rev">
+    <div>
+      <div class="sec-eyebrow">Latest Updates</div>
+      <h2 class="sec-title">News &amp; <span class="it">Events</span></h2>
+    </div>
+    <a href="#" class="btn-primary" style="font-size:0.8rem;padding:11px 24px;">View All News</a>
+  </div>
+  <div class="news-grid rev">
+    <div class="news-card featured">
+      <div class="nc-img">
+        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=88" alt="Admissions">
+        <span class="nc-tag">📣 Admissions</span>
+      </div>
+      <div class="nc-body">
+        <p class="nc-date">📅 January 2025</p>
+        <h3>2025 Admissions Open — S.1 &amp; S.5 Applications Now Accepted</h3>
+        <p>STALCONY is pleased to announce that applications for the 2025 academic year are now open. We welcome bright, disciplined boys from across West Nile and Uganda to join our growing community of scholars. Limited boarding spaces available.</p>
+        <a href="#admissions" class="nc-link">Apply Now →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="nc-img">
+        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&q=85" alt="New Classrooms">
+        <span class="nc-tag">🏫 Development</span>
+      </div>
+      <div class="nc-body">
+        <p class="nc-date">📅 October 2023</p>
+        <h3>New Classroom Blocks Commissioned at STALCONY</h3>
+        <p>2 blocks of 5 classrooms commissioned by RDC Zombo at a cost of UGX 308 million under Ministry of Education's expansion programme.</p>
+        <a href="#" class="nc-link">Read More →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="nc-img">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=85" alt="Scholarship">
+        <span class="nc-tag">🎓 Scholarships</span>
+      </div>
+      <div class="nc-body">
+        <p class="nc-date">📅 2024</p>
+        <h3>OBA Scholarship Scheme — 70+ Students Supported</h3>
+        <p>The Old Boys Association has now supported over 70 needy but academically gifted students with bursaries since 2019.</p>
+        <a href="#oba" class="nc-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ ADMISSIONS CTA ░░ -->
+<div class="admissions-sec" id="admissions">
+  <div class="sec-eyebrow">Join STALCONY</div>
+  <h2 class="sec-title">Be Part of <span class="it">the Revival</span></h2>
+  <p>Admissions are open for 2025. Boys who are disciplined, academically motivated, and ready to be part of something historic are invited to apply. Day and full boarding available at Nyapea, Zombo.</p>
+  <div class="adm-btns">
+    <a href="https://wa.me/256700000000?text=Hello%20STALCONY%2C%20I%20would%20like%20to%20apply%20for%20admission%20in%202025.%20Please%20send%20me%20the%20requirements." target="_blank" class="btn-wa" style="font-size:0.9rem;padding:16px 36px;">
+      💬 WhatsApp to Apply
+    </a>
+    <a href="mailto:stalcony@gmail.com?subject=Admission%20Enquiry%202025&body=Hello%20St.%20Aloysius%20College%20Nyapea%2C%0A%0AI%20would%20like%20to%20apply%20for%20admission.%0A%0AStudent%20Name%3A%0AClass%20Applying%20For%3A%0AParent%20Name%3A%0AContact%3A%0A%0AThank%20you." class="btn-gold">
+      ✉ Email Application
+    </a>
+  </div>
+  <div class="adm-info-pills">
+    <div class="adm-pill">🏠 Full Boarding Available</div>
+    <div class="adm-pill">👦 Boys Only</div>
+    <div class="adm-pill">📚 S.1 – S.6</div>
+    <div class="adm-pill">🎓 Scholarship Available</div>
+    <div class="adm-pill">✝️ Catholic Founded</div>
+    <div class="adm-pill">🌍 Government Aided</div>
+  </div>
+</div>
+
+<!-- ░░ CONTACT ░░ -->
+<section class="contact-sec" id="contact">
+  <div class="contact-layout">
+    <div class="rev-l">
+      <div class="sec-eyebrow">Find &amp; Reach Us</div>
+      <h2 class="sec-title">Contact <span class="it">STALCONY</span></h2>
+      <div class="gold-bar"></div>
+      <p class="sec-desc">We are located in Nyapea Sub-county, approximately 8km from Paidha and 10km from Zombo town — easily accessible from across West Nile.</p>
+      <div class="contact-cards">
+        <a href="https://maps.google.com/?q=2.458611,30.948056" target="_blank" class="c-card">
+          <div class="c-icon">📍</div>
+          <div>
+            <h4>Physical Address</h4>
+            <p>Nyapea Sub-county, Zombo District<br>West Nile Region, Northern Uganda<br><small style="color:var(--gray);font-size:0.78rem;">Coordinates: 2°27'31"N 30°56'53"E</small></p>
+          </div>
+        </a>
+        <div class="c-card">
+          <div class="c-icon">📮</div>
+          <div>
+            <h4>Postal Address</h4>
+            <p>P.O. Box 71, Paidha<br>Zombo District, Uganda</p>
+          </div>
+        </div>
+        <a href="https://www.stalcony.ac.ug/wp" target="_blank" class="c-card">
+          <div class="c-icon">🌐</div>
+          <div>
+            <h4>Official Website</h4>
+            <p>www.stalcony.ac.ug</p>
+          </div>
+        </a>
+        <a href="https://wa.me/256700000000" target="_blank" class="c-card" style="border-left-color:var(--wa-green);">
+          <div class="c-icon" style="background:var(--wa-green);">💬</div>
+          <div>
+            <h4>WhatsApp (Admissions)</h4>
+            <p>Chat with us instantly for any enquiries, admissions, or OBA matters</p>
+          </div>
+        </a>
+      </div>
+      <div class="social-follow" style="margin-top:24px;">
+        <h4>Follow STALCONY Online</h4>
+        <div class="soc-pills">
+          <a href="https://www.facebook.com/p/St-Aloysius-College-Nyapea-Stalcony-100064878826005/" target="_blank" class="soc-pill soc-fb">f Facebook</a>
+          <a href="https://twitter.com/CollegeNyapea" target="_blank" class="soc-pill soc-tw">𝕏 Twitter / X</a>
+          <a href="https://www.youtube.com/watch?v=4_HhfGKTWRo" target="_blank" class="soc-pill soc-yt">▶ YouTube</a>
+        </div>
+      </div>
+    </div>
+    <div class="rev-r">
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.5!2d30.9458!3d2.4586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMjcnMzEuMCJOIDMwwrA1Nic1My4wIkU!5e0!3m2!1sen!2sug!4v1234567890!5m2!1sen!2sug"
+          allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="St Aloysius College Nyapea Location">
+        </iframe>
+        <div class="map-footer">
+          📍 <span>St. Aloysius College Nyapea (STALCONY)</span> — Zombo District, West Nile, Uganda
+        </div>
+      </div>
+
+      <!-- WhatsApp CTA Card -->
+      <div style="margin-top:20px;background:linear-gradient(135deg,#075E54,#128C7E);border-radius:14px;padding:28px;border:2px solid var(--wa-green);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <span style="font-size:2rem;">💬</span>
+          <div>
+            <strong style="color:white;font-size:1rem;font-family:'Playfair Display',serif;display:block;">Chat on WhatsApp</strong>
+            <span style="color:rgba(255,255,255,0.7);font-size:0.78rem;">Instant replies from our admissions team</span>
+          </div>
+        </div>
+        <p style="color:rgba(255,255,255,0.75);font-size:0.87rem;line-height:1.65;margin-bottom:18px;">
+          Have questions about admissions, scholarships, fees, or the Old Boys Association? Chat with us now — we respond within minutes during school hours.
+        </p>
+        <a href="https://wa.me/256700000000?text=Hello%20STALCONY%2C%20I%20would%20like%20to%20inquire%20about%3A" target="_blank"
+          style="display:inline-flex;align-items:center;gap:8px;background:var(--wa-green);color:white;font-weight:700;font-size:0.88rem;padding:13px 26px;border-radius:3px;text-decoration:none;transition:all 0.3s;letter-spacing:0.04em;text-transform:uppercase;">
+          💬 Start WhatsApp Chat
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand-col">
+      <div class="f-logo-row">
+        <div class="f-shield"><span>SA</span></div>
+        <div>
+          <div class="f-school">St. Aloysius College Nyapea</div>
+          <div class="f-loc">STALCONY · Est. 1938 · Zombo, Uganda</div>
+        </div>
+      </div>
+      <p>A boys-only Catholic boarding school in Nyapea, Zombo District — West Nile's legendary institution of academic excellence, now rising to its former glory.</p>
+      <div class="stalcony-badge">⚜ "Dikiri en Etego" — The Elephant Returns</div>
+    </div>
+    <div class="f-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#about">About STALCONY</a></li>
+        <li><a href="#academics">Academic Programme</a></li>
+        <li><a href="#alumni">Distinguished Alumni</a></li>
+        <li><a href="#gallery">Photo Gallery</a></li>
+        <li><a href="#oba">Old Boys Association</a></li>
+        <li><a href="#news">News &amp; Events</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Academics</h5>
+      <ul>
+        <li><a href="#academics">O Level (S.1–S.4)</a></li>
+        <li><a href="#academics">A Level (S.5–S.6)</a></li>
+        <li><a href="#academics">Sciences Department</a></li>
+        <li><a href="#academics">Arts Department</a></li>
+        <li><a href="#academics">Sports &amp; Athletics</a></li>
+        <li><a href="#admissions">Scholarships</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">📍 Nyapea, Zombo District</a></li>
+        <li><a href="#">📮 P.O. Box 71, Paidha</a></li>
+        <li><a href="https://www.stalcony.ac.ug/wp">🌐 stalcony.ac.ug</a></li>
+        <li><a href="https://wa.me/256700000000">💬 WhatsApp Enquiry</a></li>
+        <li><a href="https://www.facebook.com/p/St-Aloysius-College-Nyapea-Stalcony-100064878826005/">f Facebook Page</a></li>
+        <li><a href="https://twitter.com/CollegeNyapea">𝕏 @CollegeNyapea</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 St. Aloysius College Nyapea (STALCONY). All rights reserved.</span>
+    <span>Designed &amp; Built by <a href="#">CLEAN Money Avenue Media &amp; Technology Ltd.</a></span>
+  </div>
+</footer>
+
+<!-- ░░ WHATSAPP FLOATING BUTTON ░░ -->
+<div class="wa-float">
+  <div class="wa-tooltip">💬 Chat with STALCONY on WhatsApp</div>
+  <a href="https://wa.me/256700000000?text=Hello%20St.%20Aloysius%20College%20Nyapea%2C%20I%20would%20like%20to%20inquire%20about%20admissions%20and%20your%20school." target="_blank" class="wa-btn" title="Chat with us on WhatsApp">
+    💬
+  </a>
+</div>
+
+<!-- ░░ LIGHTBOX ░░ -->
+<div class="lightbox" id="lightbox" onclick="closeLb(event)">
+  <div class="lb-img-wrap">
+    <span class="lb-close" onclick="closeLb()">×</span>
+    <img id="lbImg" src="" alt="">
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+</div>
+
+<script>
+// ── Scroll Reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('on'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el => obs.observe(el));
+
+// ── Lightbox
+function openLb(el, cap) {
+  const src = el.querySelector('img').src.replace(/w=\d+/, 'w=1400');
+  document.getElementById('lbImg').src = src;
+  document.getElementById('lbCap').textContent = cap || '';
+  document.getElementById('lightbox').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.target.className === 'lb-close') {
+    document.getElementById('lightbox').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('on'); document.body.style.overflow = ''; }});
+
+// ── Mobile Menu
+function toggleMenu() {
+  const m = document.getElementById('mobMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// ── Counter animation
+function animateCounters() {
+  document.querySelectorAll('.srib strong').forEach(el => {
+    const text = el.textContent;
+    const num = parseInt(text.replace(/\D/g,''));
+    if (!isNaN(num) && num > 0 && num < 5000) {
+      let start = 0;
+      const step = Math.ceil(num / 60);
+      const interval = setInterval(() => {
+        start += step;
+        if (start >= num) {
+          el.textContent = text;
+          clearInterval(interval);
+        } else {
+          el.textContent = start + (text.includes('+') ? '+' : '');
+        }
+      }, 20);
+    }
+  });
+}
+const heroObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) { animateCounters(); heroObs.disconnect(); }
+}, { threshold: 0.3 });
+const ribbon = document.querySelector('.stats-ribbon');
+if (ribbon) heroObs.observe(ribbon);
+
+// ── Active nav on scroll
+const secs = document.querySelectorAll('section[id],div[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = a.getAttribute('href');
+    a.style.color = (href === '#'+cur) ? 'var(--maroon)' : '';
+    a.style.fontWeight = (href === '#'+cur) ? '700' : '';
+  });
+});
+
+// ── Close mob menu on outside click
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobMenu');
+  const ham = document.querySelector('.ham');
+  if (menu && !menu.contains(e.target) && !ham.contains(e.target)) {
+    menu.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
